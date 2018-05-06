@@ -1,24 +1,22 @@
-{
-  "items": [
-    {
-      "src": "https://images.unsplash.com/photo-1524272332618-3a94122bb0c1?ixlib=rb-0.3.5&s=36a6da3e0cd2e98d8cba72841358022a&auto=format&fit=crop&w=750&q=80",
-      "description": "Nice picture 1"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1508164005423-5d2e49b2a749?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5d4316a2e8a01c529c4c6dd2d1b8b775&auto=format&fit=crop&w=750&q=80",
-      "description": "Nice picture 2"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1515261197749-867a029926fe?ixlib=rb-0.3.5&s=79b3a42bbdf5322d670a54903f4da614&auto=format&fit=crop&w=667&q=80",
-      "description": "Nice picture 3"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1514806052094-33fd2075458b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b26259946dcbb583b19161bd161f0a1d&auto=format&fit=crop&w=750&q=80",
-      "description": "Nice picture 4"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1507550442364-c0a42bd688e0?ixlib=rb-0.3.5&s=0a0ff901077832b40d59a728b234b33f&auto=format&fit=crop&w=750&q=80",
-      "description": "Nice picture 5"
-    }
-  ]
-}
+[
+  {
+    "url": "https://images.unsplash.com/photo-1524272332618-3a94122bb0c1?ixlib=rb-0.3.5&s=36a6da3e0cd2e98d8cba72841358022a&auto=format&fit=crop&w=750&q=80",
+    "description": "Nice picture 1"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1508164005423-5d2e49b2a749?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5d4316a2e8a01c529c4c6dd2d1b8b775&auto=format&fit=crop&w=750&q=80",
+    "description": "Nice picture 2"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1515261197749-867a029926fe?ixlib=rb-0.3.5&s=79b3a42bbdf5322d670a54903f4da614&auto=format&fit=crop&w=667&q=80",
+    "description": "Nice picture 3"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1514806052094-33fd2075458b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b26259946dcbb583b19161bd161f0a1d&auto=format&fit=crop&w=750&q=80",
+    "description": "Nice picture 4"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1507550442364-c0a42bd688e0?ixlib=rb-0.3.5&s=0a0ff901077832b40d59a728b234b33f&auto=format&fit=crop&w=750&q=80",
+    "description": "Nice picture 5"
+  }
+]
