@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 
 public class JsonAssetsReader<T> {
@@ -27,7 +28,7 @@ public class JsonAssetsReader<T> {
         this.fileName = fileName;
     }
 
-    public T[] getAssetsCollection() {
+    public T[] getAssetsCollection(Class<T> clazz) {
         Reader file;
         try {
             file = getAssetsFile();
@@ -35,9 +36,8 @@ public class JsonAssetsReader<T> {
             return null;
         }
         Gson gson = new Gson();
-        Type collectionType = new TypeToken<T[]>() {
-        }.getType();
-        return gson.fromJson(file, collectionType);
+        T[] collection = (T[]) Array.newInstance(clazz, 0);
+        return (T[])gson.fromJson(file, (Type) collection.getClass());
     }
 
     private InputStreamReader getAssetsFile() throws IOException {
