@@ -10,12 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
+import com.boiko.taisa.gallery.domain.model.GalleryImageAdapter;
 import com.boiko.taisa.gallery.domain.model.PicassoAdapter;
 import com.boiko.taisa.gallery.R;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private GalleryItem[] dataset;
+    private final GalleryImageAdapter imageViewAdapter = new PicassoAdapter();
 
     public RecyclerViewAdapter(GalleryItem[] dataset) {
         this.dataset = dataset;
@@ -23,7 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+                                         int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.gallery_item_layout, parent, false);
         ViewHolder vh = new ViewHolder(v);
@@ -34,7 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d("onBindViewHolder", Integer.toString(position));
         holder.caption.setText(dataset[position].getDescription());
-        PicassoAdapter.setImageSrc(holder.image, dataset[position].getUrl());
+        imageViewAdapter.setImageSourceIntoView(holder.image, dataset[position].getUrl());
     }
 
     @Override
