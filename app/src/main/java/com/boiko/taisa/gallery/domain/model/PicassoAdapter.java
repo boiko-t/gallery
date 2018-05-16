@@ -1,4 +1,4 @@
-package com.boiko.taisa.gallery.Models;
+package com.boiko.taisa.gallery.domain.model;
 
 import android.widget.ImageView;
 

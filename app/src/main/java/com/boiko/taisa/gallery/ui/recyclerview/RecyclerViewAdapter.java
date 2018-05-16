@@ -1,4 +1,4 @@
-package com.boiko.taisa.gallery;
+package com.boiko.taisa.gallery.ui.recyclerview;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.boiko.taisa.gallery.Models.GalleryItem;
-import com.boiko.taisa.gallery.Models.PicassoAdapter;
-import com.squareup.picasso.Picasso;
+import com.boiko.taisa.gallery.domain.entity.GalleryItem;
+import com.boiko.taisa.gallery.domain.model.PicassoAdapter;
+import com.boiko.taisa.gallery.R;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 

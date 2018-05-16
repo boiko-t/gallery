@@ -1,4 +1,4 @@
-package com.boiko.taisa.gallery.Models;
+package com.boiko.taisa.gallery.domain.entity;
 
 /**
  * Created by taisa on 02.05.18.
