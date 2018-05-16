@@ -10,14 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
-import com.boiko.taisa.gallery.domain.model.GalleryImageAdapter;
-import com.boiko.taisa.gallery.domain.model.PicassoAdapter;
+import com.boiko.taisa.gallery.domain.adapter.image.GalleryImageAdapter;
+import com.boiko.taisa.gallery.domain.adapter.image.PicassoGalleryImageAdapter;
 import com.boiko.taisa.gallery.R;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private GalleryItem[] dataset;
-    private final GalleryImageAdapter imageViewAdapter = new PicassoAdapter();
+    private final GalleryImageAdapter imageViewAdapter = new PicassoGalleryImageAdapter();
 
     public RecyclerViewAdapter(GalleryItem[] dataset) {
         this.dataset = dataset;
