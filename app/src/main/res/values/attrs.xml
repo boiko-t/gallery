@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <declare-styleable name="GalleryImage">
+        <attr name="caption" format="string"/>
+        <attr name="showCaption" format="boolean"/>
+        <attr name="captionPosition" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

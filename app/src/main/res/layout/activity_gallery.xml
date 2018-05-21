@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:gallery="http://schemas.android.com/apk/com.boiko.taisa.gallery.ui.view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.boiko.taisa.gallery.ui.activity.GalleryActivity">
+    <com.boiko.taisa.gallery.ui.view.GalleryImage
+        gallery:captionPosition="top"
+        gallery:showCaption="true"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
