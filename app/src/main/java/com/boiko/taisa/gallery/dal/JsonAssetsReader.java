@@ -3,8 +3,6 @@ package com.boiko.taisa.gallery.dal;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;

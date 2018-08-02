@@ -5,9 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 import com.boiko.taisa.gallery.R;
 import com.boiko.taisa.gallery.dal.JsonAssetsReader;
+import com.boiko.taisa.gallery.dal.Unsplash;
+import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 import com.boiko.taisa.gallery.ui.recyclerview.RecyclerViewAdapter;
 
 public class GalleryActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         findViews();
         initRecyclerView();
+        Unsplash unsplash = new Unsplash();
     }
 
     private void findViews() {
