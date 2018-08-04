@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public interface ApiRequestSender {
+public interface UnsplashApiService {
     HttpURLConnection getApiConnection(URL url) throws IOException;
     GalleryItem getImage();
 }
