@@ -1,12 +1,16 @@
 package com.boiko.taisa.gallery.dal;
 
-import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.boiko.taisa.gallery.BuildConfig;
+import com.google.gson.JsonElement;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 
 public interface UnsplashApiService {
-    HttpURLConnection getApiConnection(URL url) throws IOException;
-    GalleryItem getImage();
+
+    @Headers("Authorization: Client-ID " + BuildConfig.unsplashApiKey)
+    @GET("photos/random")
+    Call<JsonElement> getRandomImage();
 }
