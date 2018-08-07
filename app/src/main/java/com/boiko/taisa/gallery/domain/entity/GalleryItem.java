@@ -5,15 +5,27 @@ package com.boiko.taisa.gallery.domain.entity;
  */
 
 public class GalleryItem {
+    private static final String AUTHOR_DESCRIPTION = "The image by ";
     private String url;
     private String description;
+    private String author;
 
-    public GalleryItem() {
+    public GalleryItem(String url) {
+        this.url = url;
+        this.description = "";
+        this.author = "...";
     }
 
-    public GalleryItem(String url, String description) {
+    public GalleryItem(String url, String author) {
+        this.url = url;
+        this.description = "";
+        this.author = author;
+    }
+
+    public GalleryItem(String url, String description, String author) {
         this.url = url;
         this.description = description;
+        this.author = author;
     }
 
     public String getUrl() {
@@ -25,10 +37,20 @@ public class GalleryItem {
     }
 
     public String getDescription() {
-        return description;
+        return (description == null) ?
+                AUTHOR_DESCRIPTION.concat(author)
+                : description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

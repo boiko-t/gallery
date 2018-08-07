@@ -1,4 +1,4 @@
-package com.boiko.taisa.gallery.dal;
+package com.boiko.taisa.gallery.dal.unsplash;
 
 
 import com.boiko.taisa.gallery.BuildConfig;
