@@ -14,12 +14,14 @@ import com.boiko.taisa.gallery.domain.adapter.image.GalleryImageAdapter;
 import com.boiko.taisa.gallery.domain.adapter.image.PicassoGalleryImageAdapter;
 import com.boiko.taisa.gallery.R;
 
+import java.util.List;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private GalleryItem[] dataset;
+    private List<GalleryItem> dataset;
     private final GalleryImageAdapter imageViewAdapter = new PicassoGalleryImageAdapter();
 
-    public RecyclerViewAdapter(GalleryItem[] dataset) {
+    public RecyclerViewAdapter(List<GalleryItem> dataset) {
         this.dataset = dataset;
     }
 
@@ -35,13 +37,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d("onBindViewHolder", Integer.toString(position));
-        holder.caption.setText(dataset[position].getDescription());
-        imageViewAdapter.setImageSourceIntoView(holder.image, dataset[position].getUrl());
+        holder.caption.setText(dataset.get(position).getDescription());
+        imageViewAdapter.setImageSourceIntoView(holder.image, dataset.get(position).getUrl());
     }
 
     @Override
     public int getItemCount() {
-        return dataset.length;
+        return dataset.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
