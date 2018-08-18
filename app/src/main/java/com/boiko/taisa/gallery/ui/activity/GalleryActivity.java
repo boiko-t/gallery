@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.boiko.taisa.gallery.R;
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
+import com.boiko.taisa.gallery.domain.model.GalleryModel;
 import com.boiko.taisa.gallery.domain.presenter.BasePresenter;
 import com.boiko.taisa.gallery.domain.presenter.GalleryPresenter;
 import com.boiko.taisa.gallery.domain.view.BaseView;
@@ -16,24 +17,37 @@ import java.util.List;
 
 public class GalleryActivity extends AppCompatActivity implements BaseView {
 
+    private final GalleryModel model = GalleryModel.getInstance();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private BasePresenter<GalleryActivity> presenter;
+    private BasePresenter<GalleryActivity, GalleryModel> presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         findViews();
-        createPresenter();
+
+        presenter = new GalleryPresenter(model);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.onViewAttach(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.onViewDetach();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        presenter.detachView();
+        presenter = null;
     }
 
     private void findViews() {
@@ -45,11 +59,5 @@ public class GalleryActivity extends AppCompatActivity implements BaseView {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerViewAdapter(data);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void createPresenter() {
-        presenter = new GalleryPresenter();
-        presenter.attachView(this);
     }
 }
