@@ -1,11 +1,13 @@
 package com.boiko.taisa.gallery.domain.entity;
 
+import com.boiko.taisa.gallery.BuildConfig;
+
 /**
  * Created by taisa on 02.05.18.
  */
 
 public class GalleryItem {
-    private static final String AUTHOR_DESCRIPTION = "The image by ";
+    private static final String AUTHOR_DESCRIPTION = BuildConfig.defaultAuthorDescription;
     private String url;
     private String description;
     private String author;

@@ -10,8 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
-import com.boiko.taisa.gallery.domain.adapter.image.GalleryImageAdapter;
-import com.boiko.taisa.gallery.domain.adapter.image.PicassoGalleryImageAdapter;
+import com.boiko.taisa.gallery.domain.adapter.image.ImageLoader;
 import com.boiko.taisa.gallery.R;
 
 import java.util.List;
@@ -19,10 +18,11 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private List<GalleryItem> dataset;
-    private final GalleryImageAdapter imageViewAdapter = new PicassoGalleryImageAdapter();
+    private final ImageLoader imageViewAdapter;
 
-    public RecyclerViewAdapter(List<GalleryItem> dataset) {
+    public RecyclerViewAdapter(List<GalleryItem> dataset, ImageLoader imageViewAdapter) {
         this.dataset = dataset;
+        this.imageViewAdapter = imageViewAdapter;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d("onBindViewHolder", Integer.toString(position));
         holder.caption.setText(dataset.get(position).getDescription());
-        imageViewAdapter.setImageSourceIntoView(holder.image, dataset.get(position).getUrl());
+        imageViewAdapter.loadImage(holder.image, dataset.get(position).getUrl());
     }
 
     @Override
@@ -53,8 +53,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.image = itemView.findViewById(R.id.image);
-            this.caption = itemView.findViewById(R.id.caption);
+            this.image = itemView.findViewById(R.id.ivImageSource);
+            this.caption = itemView.findViewById(R.id.tvCaption);
         }
     }
 }

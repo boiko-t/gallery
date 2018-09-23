@@ -6,12 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.boiko.taisa.gallery.R;
+import com.boiko.taisa.gallery.domain.adapter.image.PicassoGalleryImageAdapter;
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 import com.boiko.taisa.gallery.domain.model.GalleryModel;
 import com.boiko.taisa.gallery.domain.presenter.BasePresenter;
 import com.boiko.taisa.gallery.domain.presenter.GalleryPresenter;
 import com.boiko.taisa.gallery.domain.view.BaseView;
 import com.boiko.taisa.gallery.ui.recyclerview.RecyclerViewAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -51,13 +53,13 @@ public class GalleryActivity extends AppCompatActivity implements BaseView {
     }
 
     private void findViews() {
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.rvGallery);
     }
 
     public void initRecyclerView(List<GalleryItem> data) {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerViewAdapter(data);
+        adapter = new RecyclerViewAdapter(data, new PicassoGalleryImageAdapter(Picasso.get()));
         recyclerView.setAdapter(adapter);
     }
 }

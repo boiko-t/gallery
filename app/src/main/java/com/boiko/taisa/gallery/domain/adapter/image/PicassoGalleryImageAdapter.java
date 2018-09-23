@@ -4,10 +4,16 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-public class PicassoGalleryImageAdapter implements GalleryImageAdapter {
+public class PicassoGalleryImageAdapter implements ImageLoader {
+
+    private final Picasso picasso;
+
+    public PicassoGalleryImageAdapter(Picasso picasso) {
+        this.picasso = picasso;
+    }
 
     @Override
-    public void setImageSourceIntoView(ImageView imageView, String source) {
-        Picasso.get().load(source).into(imageView);
+    public void loadImage(ImageView imageView, String source) {
+        picasso.load(source).into(imageView);
     }
 }

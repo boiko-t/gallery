@@ -11,21 +11,18 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    sourceSets {
-        main {
-            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
-        }
-    }
     buildTypes {
         debug {
             buildConfigField 'String',  "unsplashApiKey", unsplash_api_key
-            resValue 'string', "unsplash_api_key", unsplash_api_key
+            buildConfigField 'String',  "defaultAuthorDescription", default_author_description
+            buildConfigField 'String',  "defaultGalleryData", default_gallery_data
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String',  "unsplashApiKey", unsplash_api_key
-            resValue 'string', "unsplash_api_key", unsplash_api_key
+            buildConfigField 'String',  "defaultAuthorDescription", default_author_description
+            buildConfigField 'String',  "defaultGalleryData", default_gallery_data
         }
     }
     compileOptions {
