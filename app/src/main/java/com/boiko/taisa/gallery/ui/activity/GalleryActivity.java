@@ -8,22 +8,21 @@ import android.support.v7.widget.RecyclerView;
 import com.boiko.taisa.gallery.R;
 import com.boiko.taisa.gallery.domain.adapter.image.PicassoGalleryImageAdapter;
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
-import com.boiko.taisa.gallery.domain.model.GalleryModel;
-import com.boiko.taisa.gallery.domain.presenter.BasePresenter;
-import com.boiko.taisa.gallery.domain.presenter.GalleryPresenter;
-import com.boiko.taisa.gallery.domain.view.BaseView;
+import com.boiko.taisa.gallery.ui.mvp.GalleryModel;
+import com.boiko.taisa.gallery.ui.mvp.Gallery;
+import com.boiko.taisa.gallery.ui.mvp.GalleryPresenter;
 import com.boiko.taisa.gallery.ui.recyclerview.RecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class GalleryActivity extends AppCompatActivity implements BaseView {
+public class GalleryActivity extends AppCompatActivity implements Gallery.View {
 
     private final GalleryModel model = GalleryModel.getInstance();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private BasePresenter<GalleryActivity, GalleryModel> presenter;
+    private Gallery.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +41,21 @@ public class GalleryActivity extends AppCompatActivity implements BaseView {
 
     @Override
     protected void onStop() {
-        super.onStop();
         presenter.onViewDetach();
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         presenter = null;
+        super.onDestroy();
     }
 
     private void findViews() {
         recyclerView = findViewById(R.id.rvGallery);
     }
 
+    @Override
     public void initRecyclerView(List<GalleryItem> data) {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

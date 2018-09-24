@@ -1,4 +1,4 @@
-package com.boiko.taisa.gallery.domain.model;
+package com.boiko.taisa.gallery.ui.mvp;
 
 import com.boiko.taisa.gallery.BuildConfig;
 import com.boiko.taisa.gallery.dal.ResourcesFileLoader;
@@ -10,7 +10,7 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class GalleryModel implements BaseModel {
+public class GalleryModel implements Gallery.Model {
     private static final String DATA_FILE_NAME = BuildConfig.defaultGalleryData;
 
     private static GalleryModel INSTANCE;
@@ -22,14 +22,14 @@ public class GalleryModel implements BaseModel {
         loader = new ResourcesFileLoader(DATA_FILE_NAME);
     }
 
-    public static synchronized GalleryModel getInstance() {
+    public static GalleryModel getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new GalleryModel();
         }
         return INSTANCE;
     }
 
-    private List<GalleryItem> getDataFromAsset() {
+    private List<GalleryItem> getRawData() {
         Reader file = loader.getRawFile();
         Gson gson = new Gson();
         Type collectionType = new TypeToken<List<GalleryItem>>() {
@@ -38,13 +38,13 @@ public class GalleryModel implements BaseModel {
     }
 
     @Override
-    public void getData() {
-        state = new State(getDataFromAsset());
+    public void loadData() {
+        state = new State(getRawData());
         listener.onWorkComplete(state);
     }
 
     @Override
-    public void setListener(Listener listener) {
+    public void addListener(Listener listener) {
         this.listener = listener;
         if (state != null) {
             listener.onWorkComplete(state);
@@ -52,15 +52,7 @@ public class GalleryModel implements BaseModel {
     }
 
     @Override
-    public void removeListener() {
+    public void removeListener(Listener listener) {
         this.listener = null;
-    }
-
-    public class State implements ModelState {
-        public final List<GalleryItem> data;
-
-        public State(List<GalleryItem> data) {
-            this.data = data;
-        }
     }
 }
