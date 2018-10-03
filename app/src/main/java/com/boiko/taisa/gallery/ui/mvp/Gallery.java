@@ -4,23 +4,23 @@ import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public interface Gallery {
     interface Model {
         void loadData();
 
-        void addListener(Listener listener);
+        Observable<State> getStateObservable();
 
-        void removeListener(Listener listener);
-
-        interface Listener {
-            void onWorkComplete(State state);
-        }
+        Observable<Throwable> getErrorObservable();
 
         class State {
             public final List<GalleryItem> data;
+            public final boolean isInProgress;
 
-            State(List<GalleryItem> data) {
+            State(List<GalleryItem> data, boolean isInProgress) {
                 this.data = data;
+                this.isInProgress = isInProgress;
             }
         }
     }

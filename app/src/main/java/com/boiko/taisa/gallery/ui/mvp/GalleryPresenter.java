@@ -1,9 +1,12 @@
 package com.boiko.taisa.gallery.ui.mvp;
 
-public class GalleryPresenter implements Gallery.Presenter, Gallery.Model.Listener {
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
-    private Gallery.View view;
+public class GalleryPresenter implements Gallery.Presenter {
+
     private Gallery.Model model;
+    private Disposable disposable;
 
     public GalleryPresenter(Gallery.Model model) {
         this.model = model;
@@ -11,19 +14,21 @@ public class GalleryPresenter implements Gallery.Presenter, Gallery.Model.Listen
 
     @Override
     public void onViewAttach(Gallery.View view) {
-        this.view = view;
-        model.addListener(this);
+        disposable = model
+                .getStateObservable()
+                .subscribe(new Consumer<Gallery.Model.State>() {
+                    @Override
+                    public void accept(Gallery.Model.State state) throws Exception {
+                       if(!state.data.isEmpty()) view.initRecyclerView(state.data);
+                    }
+                });
         model.loadData();
     }
 
     @Override
     public void onViewDetach() {
-        this.view = null;
-        this.model.removeListener(this);
-    }
-
-    @Override
-    public void onWorkComplete(Gallery.Model.State state) {
-        view.initRecyclerView(state.data);
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }
