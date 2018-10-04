@@ -9,16 +9,18 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public class GalleryLocalRepository implements GalleryRepository {
     private static final String DATA_FILE_NAME = BuildConfig.defaultGalleryData;
 
     @Override
-    public List<GalleryItem> getRandomCollection() {
+    public Observable<List<GalleryItem>> getRandomCollection() {
         ResourcesFileReader reader = new ResourcesFileReader(DATA_FILE_NAME);
         Reader file = reader.getRawFile();
         Gson gson = new Gson();
         Type collectionType = new TypeToken<List<GalleryItem>>() {
         }.getType();
-        return (List<GalleryItem>) gson.fromJson(file, collectionType);
+        return Observable.just((List<GalleryItem>) gson.fromJson(file, collectionType));
     }
 }

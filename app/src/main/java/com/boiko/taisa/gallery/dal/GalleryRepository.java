@@ -4,6 +4,8 @@ import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public interface GalleryRepository {
-    List<GalleryItem> getRandomCollection();
+    Observable<List<GalleryItem>> getRandomCollection();
 }

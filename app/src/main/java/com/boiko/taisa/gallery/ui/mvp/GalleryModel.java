@@ -4,8 +4,11 @@ import android.util.Log;
 
 import com.boiko.taisa.gallery.dal.GalleryLocalRepository;
 import com.boiko.taisa.gallery.dal.GalleryRepository;
+import com.boiko.taisa.gallery.dal.unsplash.GalleryUnsplashRepository;
+import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +26,8 @@ public class GalleryModel implements Gallery.Model {
     private PublishSubject<Throwable> errorState = PublishSubject.create();
 
     private GalleryModel() {
-        this.repository = new GalleryLocalRepository();
+        this.repository = new GalleryUnsplashRepository();
+//        this.repository = new GalleryLocalRepository();
     }
 
     public static GalleryModel getInstance() {
@@ -40,20 +44,20 @@ public class GalleryModel implements Gallery.Model {
     @Override
     public void loadData() {
         state.onNext(new State(new ArrayList<>(), true));
-        Observable.just(new State(repository.getRandomCollection(), false))
-                .delay(5, TimeUnit.SECONDS)
+        repository.getRandomCollection()
+                .delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<State>() {
+                .subscribe(new Consumer<List<GalleryItem>>() {
                     @Override
-                    public void accept(State state) throws Exception {
-                        if (new Random().nextInt() % 3 == 0) {
-                            Log.d(GalleryModel.class.getSimpleName(), "accept: " + state);
-                            GalleryModel.this.state.onNext(state);
-                        } else {
-                            Log.d(GalleryModel.class.getSimpleName(), "simulated error: ");
-                            GalleryModel.this.errorState.onNext(new Throwable("simulated error"));
-                        }
+                    public void accept(List<GalleryItem> data) throws Exception {
+//                        if (new Random().nextInt() % 3 == 0) {
+                            Log.d("galleryLog", "accept: " + data);
+                            GalleryModel.this.state.onNext(new State(data, true));
+//                        } else {
+//                            Log.d(GalleryModel.class.getSimpleName(), "simulated error: ");
+//                            GalleryModel.this.errorState.onNext(new Throwable("simulated error"));
+//                        }
                     }
                 });
     }
