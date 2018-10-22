@@ -2,7 +2,7 @@ package com.boiko.taisa.gallery.dal;
 
 import android.content.Context;
 
-import com.boiko.taisa.gallery.Gallery;
+import com.boiko.taisa.gallery.GalleryApplication;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +14,7 @@ public class ResourcesFileReader {
 
     public ResourcesFileReader(String fileName) {
         this.fileName = fileName;
-        this.context = Gallery.getContext();
+        this.context = GalleryApplication.getContext();
     }
 
     public InputStreamReader getRawFile() {

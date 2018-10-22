@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,22 +54,19 @@ public class GalleryUnsplashRepository implements GalleryRepository {
 
     @Override
     public Observable<List<GalleryItem>> getRandomCollection() {
-        List<GalleryItem> resultList = new ArrayList<>();
-        api.getRandomCollection(10).enqueue(new Callback<List<JsonElement>>() {
-            @Override
-            public void onResponse(Call<List<JsonElement>> call, Response<List<JsonElement>> response) {
-                GalleryItemBuilder builder;
-                for (JsonElement json : response.body()) {
-                    builder = new GalleryItemBuilder(json);
+        return Observable.create(emitter -> {
+            List<GalleryItem> resultList = new ArrayList<>();
+            try {
+                List<JsonElement> response = api.getRandomCollection(10).execute().body();
+                for (JsonElement json : response) {
+                    GalleryItemBuilder builder = new GalleryItemBuilder(json);
                     resultList.add(builder.build());
                 }
-            }
-
-            @Override
-            public void onFailure(Call<List<JsonElement>> call, Throwable t) {
-                Log.d("galleryLog", "onFailure: ");
+                emitter.onNext(resultList);
+            } catch (IOException e) {
+                e.printStackTrace();
+                emitter.onError(e);
             }
         });
-        return Observable.just(resultList);
     }
 }

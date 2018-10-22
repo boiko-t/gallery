@@ -48,17 +48,9 @@ public class GalleryModel implements Gallery.Model {
                 .delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<GalleryItem>>() {
-                    @Override
-                    public void accept(List<GalleryItem> data) throws Exception {
-//                        if (new Random().nextInt() % 3 == 0) {
-                            Log.d("galleryLog", "accept: " + data);
-                            GalleryModel.this.state.onNext(new State(data, true));
-//                        } else {
-//                            Log.d(GalleryModel.class.getSimpleName(), "simulated error: ");
-//                            GalleryModel.this.errorState.onNext(new Throwable("simulated error"));
-//                        }
-                    }
+                .subscribe(data -> {
+                    Log.d("galleryLog", "accept: " + data);
+                    GalleryModel.this.state.onNext(new State(data, true));
                 });
     }
 

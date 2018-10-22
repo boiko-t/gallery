@@ -3,7 +3,7 @@ package com.boiko.taisa.gallery;
 import android.app.Application;
 import android.content.Context;
 
-public class Gallery extends Application {
+public class GalleryApplication extends Application {
     private static Context context;
 
     @Override
