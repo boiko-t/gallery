@@ -1,5 +1,6 @@
 package com.boiko.taisa.gallery.dal.unsplash;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.boiko.taisa.gallery.dal.GalleryItemBuilder;
@@ -11,14 +12,19 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

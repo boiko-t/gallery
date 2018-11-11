@@ -16,13 +16,12 @@ public class GalleryPresenter implements Gallery.Presenter {
     public void onViewAttach(Gallery.View view) {
         disposable = model
                 .getStateObservable()
-                .subscribe(new Consumer<Gallery.Model.State>() {
-                    @Override
-                    public void accept(Gallery.Model.State state) throws Exception {
-                       if(!state.data.isEmpty()) view.initRecyclerView(state.data);
-                    }
+                .subscribe(state -> {
+                    if (!state.data.isEmpty()) view.initRecyclerView(state.data);
                 });
-        model.loadData();
+        if(!view.getViewRestoreState()) {
+            model.loadData();
+        }
     }
 
     @Override

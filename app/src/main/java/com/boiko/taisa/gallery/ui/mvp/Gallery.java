@@ -27,6 +27,8 @@ public interface Gallery {
 
     interface View {
         void initRecyclerView(List<GalleryItem> data);
+
+        boolean getViewRestoreState();
     }
 
     interface Presenter {
