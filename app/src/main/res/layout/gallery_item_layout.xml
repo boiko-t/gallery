@@ -7,13 +7,16 @@
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/ivImageSource"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="center" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:maxHeight="400dp"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="10dp"/>
 </LinearLayout>

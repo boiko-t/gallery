@@ -20,7 +20,6 @@ public class GalleryItem {
 
     public GalleryItem(String url, String author) {
         this.url = url;
-        this.description = "";
         this.author = author;
     }
 

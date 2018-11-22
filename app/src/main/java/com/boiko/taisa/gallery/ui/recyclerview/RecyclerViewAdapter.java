@@ -17,11 +17,11 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<GalleryItem> dataset;
+    private List<GalleryItem> dataSet;
     private final ImageLoader imageViewAdapter;
 
-    public RecyclerViewAdapter(List<GalleryItem> dataset, ImageLoader imageViewAdapter) {
-        this.dataset = dataset;
+    public RecyclerViewAdapter(List<GalleryItem> dataSet, ImageLoader imageViewAdapter) {
+        this.dataSet = dataSet;
         this.imageViewAdapter = imageViewAdapter;
     }
 
@@ -37,13 +37,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d("onBindViewHolder", Integer.toString(position));
-        holder.caption.setText(dataset.get(position).getDescription());
-        imageViewAdapter.loadImage(holder.image, dataset.get(position).getUrl());
+        holder.caption.setText(dataSet.get(position).getDescription());
+        imageViewAdapter.loadImage(holder.image, dataSet.get(position).getUrl());
     }
 
     @Override
     public int getItemCount() {
-        return dataset.size();
+        return dataSet.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

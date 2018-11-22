@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import com.boiko.taisa.gallery.R;
 import com.boiko.taisa.gallery.domain.adapter.image.PicassoGalleryImageAdapter;
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
-import com.boiko.taisa.gallery.ui.mvp.GalleryModel;
 import com.boiko.taisa.gallery.ui.mvp.Gallery;
+import com.boiko.taisa.gallery.ui.mvp.GalleryModel;
 import com.boiko.taisa.gallery.ui.mvp.GalleryPresenter;
 import com.boiko.taisa.gallery.ui.recyclerview.RecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
@@ -31,7 +31,7 @@ public class GalleryActivity extends AppCompatActivity implements Gallery.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         findViews();
-
+        restoreInstanceState(savedInstanceState);
         presenter = new GalleryPresenter(model);
     }
 
@@ -56,14 +56,13 @@ public class GalleryActivity extends AppCompatActivity implements Gallery.View {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(IS_VIEW_RESTORED_KEY, isViewRestored);
+        outState.putBoolean(IS_VIEW_RESTORED_KEY, true);
     }
 
-    @Override
-
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        isViewRestored = savedInstanceState.getBoolean(IS_VIEW_RESTORED_KEY);
+    protected void restoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            isViewRestored = savedInstanceState.getBoolean(IS_VIEW_RESTORED_KEY);
+        }
     }
 
     @Override
