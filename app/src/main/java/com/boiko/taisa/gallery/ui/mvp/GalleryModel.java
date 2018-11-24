@@ -19,7 +19,6 @@ public class GalleryModel implements Gallery.Model {
 
     private GalleryModel() {
         this.repository = new GalleryUnsplashRepository();
-//        this.repository = new GalleryLocalRepository();
     }
 
     public static GalleryModel getInstance() {
@@ -36,7 +35,7 @@ public class GalleryModel implements Gallery.Model {
     @Override
     public void loadData() {
         state.onNext(new State(new ArrayList<>(), true));
-        repository.getRandomCollection()
+        repository.getRandomImageCollection(10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data ->

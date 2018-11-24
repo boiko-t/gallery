@@ -7,5 +7,5 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public interface GalleryRepository {
-    Observable<List<GalleryItem>> getRandomCollection();
+    Observable<List<GalleryItem>> getRandomImageCollection(int size);
 }

@@ -59,6 +59,12 @@ public class GalleryActivity extends AppCompatActivity implements Gallery.View {
         outState.putBoolean(IS_VIEW_RESTORED_KEY, true);
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        isViewRestored = savedInstanceState.getBoolean(IS_VIEW_RESTORED_KEY);
+    }
+
     protected void restoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             isViewRestored = savedInstanceState.getBoolean(IS_VIEW_RESTORED_KEY);

@@ -2,7 +2,7 @@ package com.boiko.taisa.gallery.dal.unsplash;
 
 
 import com.boiko.taisa.gallery.BuildConfig;
-import com.google.gson.JsonElement;
+import com.boiko.taisa.gallery.domain.entity.GalleryItem;
 
 import java.util.List;
 
@@ -15,9 +15,5 @@ public interface UnsplashApiService {
 
     @Headers("Authorization: Client-ID " + BuildConfig.unsplashApiKey)
     @GET("photos/random")
-    Call<JsonElement> getRandomImage();
-
-    @Headers("Authorization: Client-ID " + BuildConfig.unsplashApiKey)
-    @GET("photos/random")
-    Call<List<JsonElement>> getRandomCollection(@Query("count") int count);
+    Call<List<GalleryItem>> getRandomImageCollection(@Query("count") int count);
 }
