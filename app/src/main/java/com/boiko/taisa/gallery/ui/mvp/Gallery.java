@@ -8,7 +8,9 @@ import io.reactivex.Observable;
 
 public interface Gallery {
     interface Model {
-        void loadData();
+        void loadData(int dataSize);
+        void saveState();
+        boolean isStateSaved();
 
         Observable<State> getStateObservable();
 
@@ -27,13 +29,11 @@ public interface Gallery {
 
     interface View {
         void initRecyclerView(List<GalleryItem> data);
-
-        boolean getViewRestoreState();
     }
 
     interface Presenter {
+        void saveState();
         void onViewAttach(View view);
-
         void onViewDetach();
     }
 }

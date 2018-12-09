@@ -13,6 +13,7 @@ import io.reactivex.subjects.PublishSubject;
 
 public class GalleryModel implements Gallery.Model {
     private static GalleryModel INSTANCE;
+    private boolean isStateSaved = false;
     private GalleryRepository repository;
     private BehaviorSubject<State> state = BehaviorSubject.create();
     private PublishSubject<Throwable> errorState = PublishSubject.create();
@@ -33,14 +34,24 @@ public class GalleryModel implements Gallery.Model {
     }
 
     @Override
-    public void loadData() {
+    public void loadData(int dataSize) {
         state.onNext(new State(new ArrayList<>(), true));
-        repository.getRandomImageCollection(10)
+        repository.getRandomImageCollection(dataSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data ->
                     GalleryModel.this.state.onNext(new State(data, false))
                 );
+    }
+
+    @Override
+    public void saveState() {
+        isStateSaved = true;
+    }
+
+    @Override
+    public boolean isStateSaved() {
+        return isStateSaved;
     }
 
     @Override

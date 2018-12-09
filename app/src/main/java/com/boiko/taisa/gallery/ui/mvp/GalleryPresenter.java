@@ -13,14 +13,19 @@ public class GalleryPresenter implements Gallery.Presenter {
     }
 
     @Override
+    public void saveState() {
+        model.saveState();
+    }
+
+    @Override
     public void onViewAttach(Gallery.View view) {
         disposable = model
                 .getStateObservable()
                 .subscribe(state -> {
                     if (!state.data.isEmpty()) view.initRecyclerView(state.data);
                 });
-        if(!view.getViewRestoreState()) {
-            model.loadData();
+        if(!model.isStateSaved()) {
+            model.loadData(100);
         }
     }
 

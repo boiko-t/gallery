@@ -12,7 +12,7 @@ public class UnsplashResponseDeserializer implements JsonDeserializer {
     private final String IMAGE_OBJECT = "urls";
     private final String IMAGE_SOURCE = "regular";
     private final String USER_OBJECT = "user";
-    private final String USER_NAME = "USER_NAME";
+    private final String USER_NAME = "name";
 
     @Override
     public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
