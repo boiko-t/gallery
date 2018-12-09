@@ -36,7 +36,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.d("onBindViewHolder", Integer.toString(position));
         holder.caption.setText(dataSet.get(position).getDescription());
         imageViewAdapter.loadImage(holder.image, dataSet.get(position).getUrl());
     }

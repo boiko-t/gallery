@@ -9,19 +9,19 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 public class UnsplashResponseDeserializer implements JsonDeserializer {
+    private final String IMAGE_OBJECT = "urls";
+    private final String IMAGE_SOURCE = "regular";
+    private final String USER_OBJECT = "user";
+    private final String USER_NAME = "USER_NAME";
 
     @Override
     public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         String src = json.getAsJsonObject()
-                .get("urls")
-                .getAsJsonObject()
-                .get("regular")
-                .getAsString();
+                .get(IMAGE_OBJECT).getAsJsonObject()
+                .get(IMAGE_SOURCE).getAsString();
         String author = json.getAsJsonObject()
-                .get("user")
-                .getAsJsonObject()
-                .get("name")
-                .getAsString();
+                .get(USER_OBJECT).getAsJsonObject()
+                .get(USER_NAME).getAsString();
         return new GalleryItem(src, author);
     }
 }

@@ -2,6 +2,7 @@ package com.boiko.taisa.gallery.domain.adapter.image;
 
 import android.widget.ImageView;
 
+import com.boiko.taisa.gallery.R;
 import com.squareup.picasso.Picasso;
 
 public class PicassoGalleryImageAdapter implements ImageLoader {
@@ -14,6 +15,9 @@ public class PicassoGalleryImageAdapter implements ImageLoader {
 
     @Override
     public void loadImage(ImageView imageView, String source) {
-        picasso.load(source).into(imageView);
+        int placeholder = R.drawable.placeholder;
+        picasso.load(source)
+                .placeholder(placeholder)
+                .into(imageView);
     }
 }
