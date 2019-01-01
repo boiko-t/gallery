@@ -34,13 +34,23 @@ public class GalleryModel implements Gallery.Model {
     }
 
     @Override
-    public void loadData(int dataSize) {
+    public void loadRandomData(int dataSize) {
         state.onNext(new State(new ArrayList<>(), true));
         repository.getRandomImageCollection(dataSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data ->
                     GalleryModel.this.state.onNext(new State(data, false))
+                );
+    }
+
+    @Override
+    public void searchData(String query) {
+        repository.searchImageCollection(query, 50)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data ->
+                        GalleryModel.this.state.onNext(new State(data, false))
                 );
     }
 

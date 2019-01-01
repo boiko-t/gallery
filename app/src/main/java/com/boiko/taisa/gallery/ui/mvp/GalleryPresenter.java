@@ -1,7 +1,8 @@
 package com.boiko.taisa.gallery.ui.mvp;
 
+import android.util.Log;
+
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class GalleryPresenter implements Gallery.Presenter {
 
@@ -10,6 +11,16 @@ public class GalleryPresenter implements Gallery.Presenter {
 
     public GalleryPresenter(Gallery.Model model) {
         this.model = model;
+    }
+
+    @Override
+    public void search(String query, Gallery.View view) {
+        model.searchData(query);
+//        model.getStateObservable()
+//                .subscribe(state -> {
+////                    if (!state.data.isEmpty()) view.updateData(state.data);
+//                    Log.d("taisa", "search: " + state.data.get(0).getAuthor());
+//                });
     }
 
     @Override
@@ -25,7 +36,7 @@ public class GalleryPresenter implements Gallery.Presenter {
                     if (!state.data.isEmpty()) view.initRecyclerView(state.data);
                 });
         if(!model.isStateSaved()) {
-            model.loadData(100);
+            model.loadRandomData(50);
         }
     }
 

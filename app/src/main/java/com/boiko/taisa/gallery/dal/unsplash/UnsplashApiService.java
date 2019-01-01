@@ -16,4 +16,8 @@ public interface UnsplashApiService {
     @Headers("Authorization: Client-ID " + BuildConfig.unsplashApiKey)
     @GET("photos/random")
     Call<List<GalleryItem>> getRandomImageCollection(@Query("count") int count);
+
+    @Headers("Authorization: Client-ID " + BuildConfig.unsplashApiKey)
+    @GET("/search/photos")
+    Call<List<GalleryItem>> searchImageCollection(@Query("query") String query);
 }

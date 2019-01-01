@@ -2,7 +2,6 @@ package com.boiko.taisa.gallery.dal.unsplash;
 
 import com.boiko.taisa.gallery.dal.GalleryRepository;
 import com.boiko.taisa.gallery.domain.entity.GalleryItem;
-import com.boiko.taisa.gallery.ui.mvp.Gallery;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,7 +27,7 @@ public class GalleryUnsplashRepository implements GalleryRepository {
                 .create();
         retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(CustomConvertFactory.create(gson))
                 .build();
         api = retrofit.create(UnsplashApiService.class);
     }
@@ -41,6 +40,20 @@ public class GalleryUnsplashRepository implements GalleryRepository {
                         api.getRandomImageCollection(size).execute().body();
                 emitter.onNext(resultList);
             } catch (IOException e) {
+                e.printStackTrace();
+                emitter.onError(e);
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<GalleryItem>> searchImageCollection(String query, int size) {
+        return Observable.create(emitter -> {
+            try {
+                List<GalleryItem> resultList = api.searchImageCollection(query)
+                                .execute().body();
+                emitter.onNext(resultList);
+            } catch (Exception e) {
                 e.printStackTrace();
                 emitter.onError(e);
             }

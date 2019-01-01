@@ -56,4 +56,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             this.caption = itemView.findViewById(R.id.tvCaption);
         }
     }
+
+    public void setDataSet(List<GalleryItem> dataSet) {
+        this.dataSet = dataSet;
+    }
 }
